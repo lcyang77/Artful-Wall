@@ -72,3 +72,10 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
+# 忽略构建文件夹
+build*/
+
+# 忽略其他不需要的文件类型（根据需要添加）
+*.log
+*.tmp
+
