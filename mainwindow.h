@@ -2,11 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QScopedPointer>
+
+// Forward declarations
+class QTextEdit;
+class QPushButton;
+class QScreen;
+class MonitorInfoModel;
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -15,9 +20,18 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
+
+private slots:
+    void detectMonitors();
 
 private:
-    Ui::MainWindow *ui;
+    QScopedPointer<Ui::MainWindow> ui;
+    QTextEdit *monitorInfoTextEdit;
+    QPushButton *refreshButton;
+    QScopedPointer<MonitorInfoModel> m_monitorInfoModel;
+
+    void initializeUi();
 };
+
 #endif // MAINWINDOW_H
